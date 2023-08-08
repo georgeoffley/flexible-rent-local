@@ -1,0 +1,48 @@
+{
+  "name": "flexible-rent-local",
+  "version": "0.0.1",
+  "description": "App for helping with local development of FR products",
+  "main": "src/index.js",
+  "engines": {
+    "node": "^16.10.1"
+  },
+  "scripts": {
+    "precommit": "npm run typecheck && npm run lint && npm run format",
+    "pretest": "npm run precommit",
+    "lint": "eslint . --ext. js",
+    "format": "prettier --write .",
+    "typecheck": "tsc",
+    "start": "node src/index.js",
+    "test": "test"
+  },
+  "prettier": {
+    "semi": true,
+    "singleQuote": true,
+    "printWidth": 75,
+    "trailingComma": "es5"
+  },
+  "lint-staged": {
+    "*.{json,y{,a}ml,md}": [
+      "prettier --write"
+    ],
+    "*.js": [
+      "eslint --fix",
+      "prettier --write"
+    ]
+  },
+  "author": "George Offley",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^8.46.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-unicorn": "^48.0.1",
+    "lint-staged": "^13.2.3",
+    "prettier": "^3.0.1"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.1430.0",
+    "aws4": "^1.12.0"
+  }
+}
