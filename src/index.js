@@ -1,12 +1,13 @@
 'use strict';
+require('dotenv').config();
 
 const { assumeRoleCommand } = require('./assume-role/index');
 require('aws-sdk/lib/maintenance_mode_message').suppress = true;
 
 // Constants
-const ROLE_ARN = 'arn:aws:iam::740118527183:role/hellotill-platform-developer-production';
-const SOURCE_PROFILE = 'default';
-const MFA_SERIAL = 'arn:aws:iam::740118527183:mfa/george.offley';
+const ROLE_ARN = process.env.ROLE_ARN;
+const SOURCE_PROFILE = process.env.SOURCE_PROFILE;
+const MFA_SERIAL = process.env.MFA_SERIAL;
 const WHOAMI = process.env['WHOAMI'];
 const DATE = process.env['DATE'];
 
@@ -36,16 +37,14 @@ const question = util.promisify(rl.question).bind(rl);
     process.exit(1);
   }
 
+  const mfa = process.argv[4];
+  if(!command) {
+    console.error('No MFA COde provided')
+    process.exit(1);
+  }
+
   // TODO: Create a 'command listener' to get the commands from input
   if(command === 'assume_role') {
-    const mfa = await question(
-      `<AWS::hellotill> >> Enter MFA code << `
-    );
-    if(!mfa) {
-      console.error('No valid MFA provided');
-      process.exit(1);
-    }
-
     const { Credentials } = await assumeRoleCommand({
       roleArn: ROLE_ARN,
       roleSessionName: `cli-${WHOAMI}-${DATE}`,

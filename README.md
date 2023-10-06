@@ -1,10 +1,16 @@
 # Flexible Rent Local
 
-A PoC project for solving local development of the flexible rent product.
+A PoC project for solving local development strain for the flexible rent product.
+
+## Idea
+The idea is to create a project that handles sending HTTP requests by acting as a proxy which will handle getting the required header tokens without engineer intervention. 
+
+Additionally, this system will persist needed AWS credentials into each new terminal session started by an engineer.
+
 
 ## Planned Features
 - Take over running aws commands from any terminal
-- A Proxy server for HTTP requests to private APIs
+- A Proxy server for HTTP requests to private APIs (Internal AWS Systems, third parties like CRB and or loan pro)
   - Handles requesting bearer tokens
   - Adds bearer tokens to header of outgoing API requests
 
